@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.27.9)
+project(AOC2023_01)
+add_executable(AOC2023_01 main.cpp)
+set(CMAKE_CXX_COMPILER "g++")
+set(CMAKE_CXX_STANDARD 20)
