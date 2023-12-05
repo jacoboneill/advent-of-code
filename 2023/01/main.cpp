@@ -13,27 +13,8 @@ public:
     int count;
 
     while(std::getline(file, line)){
-      int a = 0;
-      int b = 0;
-      int line_total = 0;
-
-      for(int i = 0; i < line.size(); i++){
-        if(isdigit(line[i])){
-          a = 10 * (line[i] - '0');
-          break;
-        }
-      }
-
-      for(int i = line.size() - 1; i >= 0; i--){
-        if(isdigit(line[i])){
-          b = line[i] - '0';
-          break;
-        }
-      }
-      
-      line_total = a + b;
+      int line_total = searchFront(line) + searchBack(line); 
       count += line_total;
-
       std::cout << line << " | " << line_total << " | " << count << std::endl;
     }
     
@@ -42,21 +23,24 @@ public:
   }
 
 private:
-  std::string newTableRow(std::string line, int number, int count){
-    return line + ", " + std::to_string(number) + ", " + std::to_string(count);
+  int searchFront(std::string line){
+    for(int i = 0; i < line.size(); i++){
+      if(isdigit(line[i])){
+        return 10 * (line[i] - '0');
+      }
+    }
+
+    return -1;
   }
 
-  std::string highlight(std::string line, int index_one, int index_two){
-    const std::string bold_red = "\x1b[1;31m";
-    const std::string reset = "\x1b[0m";
+  int searchBack(std::string line){
+    for(int i = line.size() - 1; i >= 0; i--){
+      if(isdigit(line[i])){
+        return line[i] - '0';
+      }
+    }
 
-    std::string highlight = line.substr(0, index_one - 1);
-    highlight += bold_red + line.substr(index_one - 1, 1) + reset;
-    highlight += line.substr(index_one + 1, index_two - index_one - 1);
-    highlight += bold_red + line.substr(index_two, 1) + reset;
-    highlight += line.substr(index_two + 1, line.size() - index_two + 1);
-
-    return highlight;
+    return -1;
   }
 
   std::string m_fl;
