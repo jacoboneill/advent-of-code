@@ -17,9 +17,10 @@ public:
   }
 
   int* play(){
-    new int[2] answers;
+    int* answers = new int[2];
     
-    while(std::getline(m_fs, line){
+    std::string line;
+    while(std::getline(m_fs, line)){
       // ParseLine
       // Update answers[0]
       // Update answers[1]
@@ -33,7 +34,7 @@ private:
 };
 
 int main (int argc, char *argv[]) {
-  Day day;
+  Day day("../data/input.txt");
 
   return 0;
 }
